@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Password</title>
+</head>
+<body>
+
+<input type="password" id="password">
+<button id="toggle">Show</button>
+
+<script>
+  document.getElementById("toggle").onclick = function () {
+    const p = document.getElementById("password");
+    p.type = p.type === "password" ? "text" : "password";
+  };
+</script>
+
+</body>
+</html>
