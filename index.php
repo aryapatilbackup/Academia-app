@@ -1,3 +1,4 @@
 <?php
-echo "Academia App is Live 🚀";
+header("Location: login.php");
+exit();
 ?>
