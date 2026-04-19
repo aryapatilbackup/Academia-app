@@ -1,7 +1,7 @@
 <?php
 $host = "monorail.proxy.rlwy.net";
 $user = "root";
-$password = "YJKJKjXhOdKHyLLGcFhfcJ1InnosvSv";
+$password = "YJKJKKjXhOdKHyLLGcFhfcJlInnosvSv";
 $database = "railway";
 $port = 19660;
 
