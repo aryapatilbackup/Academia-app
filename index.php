@@ -1,3 +1,4 @@
 <?php
-echo "Server is working 🚀";
+header("Location: login.php");
+exit;
 ?>
