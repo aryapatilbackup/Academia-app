@@ -78,6 +78,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <link rel="stylesheet" href="login.css">
 </head>
 <body>
+   
+<div id="splash">
+  <img src="icon-192.png" alt="logo">
+</div>
 
   <div class="login-container">
     <h2>Login</h2>
@@ -129,6 +133,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js");
 }
+</script>
+
+<script>
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+  }, 1500);
+};
 </script>
 </body>
 </html>
