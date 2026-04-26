@@ -2,16 +2,6 @@
 session_start();
 require_once "config/db.php";
 
-// ✅ Auto login from cookie
-if (!isset($_SESSION['user_id']) && isset($_COOKIE['user_id'])) {
-    $_SESSION['user_id'] = $_COOKIE['user_id'];
-}
-
-// ✅ If already logged in → redirect
-if (isset($_SESSION['user_id'])) {
-    header("Location: student-dashboard.php");
-    exit;
-}
 
 $error = "";
 
@@ -47,8 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION["email"] = $user["email"];
                 $_SESSION["role"] = $user["role"];
 
-                // ✅ REMEMBER USER (cookie for 30 days)
-                setcookie("user_id", $user["id"], time() + (86400 * 30), "/");
+                
 
                 // 4️⃣ Redirect by role
                 if ($user["role"] === "admin") {
@@ -135,12 +124,5 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<script>
-window.onload = () => {
-  setTimeout(() => {
-    document.getElementById("splash").style.display = "none";
-  }, 1500);
-};
-</script>
 </body>
 </html>
