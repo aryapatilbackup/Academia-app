@@ -139,9 +139,5 @@ input:focus {
     }
     #splash img {
       width: 100px;
-      animation: zoom 1.5s ease;
-    }
-    @keyframes zoom {
-      from { transform: scale(0.5); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    
     }
