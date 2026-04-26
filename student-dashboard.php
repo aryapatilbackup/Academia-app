@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'student-auth.php';
 include 'config/db.php';
 include 'includes/bottom-nav.php';
