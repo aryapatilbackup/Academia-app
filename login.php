@@ -7,9 +7,16 @@ require_once "config/db.php";
 // auto login from cookie
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['user_id'])) {
     $_SESSION['user_id'] = $_COOKIE['user_id'];
+
+    // ✅ FIX: restore role from DB
+    $id = $_COOKIE['user_id'];
+    $res = $conn->query("SELECT role FROM users WHERE id = $id");
+    if ($res && $row = $res->fetch_assoc()) {
+        $_SESSION['role'] = $row['role'];
+    }
 }
 
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     if ($_SESSION['role'] === "admin") {
         header("Location: admin-dashboard.php");
     } elseif ($_SESSION['role'] === "teacher") {
@@ -19,6 +26,7 @@ if (isset($_SESSION['user_id'])) {
     }
     exit;
 }
+
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
