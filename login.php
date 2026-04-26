@@ -1,7 +1,24 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once "config/db.php";
 
+// auto login from cookie
+if (!isset($_SESSION['user_id']) && isset($_COOKIE['user_id'])) {
+    $_SESSION['user_id'] = $_COOKIE['user_id'];
+}
+
+if (isset($_SESSION['user_id'])) {
+    if ($_SESSION['role'] === "admin") {
+        header("Location: admin-dashboard.php");
+    } elseif ($_SESSION['role'] === "teacher") {
+        header("Location: teacher-dashboard.php");
+    } else {
+        header("Location: student-dashboard.php");
+    }
+    exit;
+}
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -36,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION["email"] = $user["email"];
                 $_SESSION["role"] = $user["role"];
 
-                
+                setcookie("user_id", $user["id"], time() + (86400 * 30), "/");
 
                 // 4️⃣ Redirect by role
                 if ($user["role"] === "admin") {
