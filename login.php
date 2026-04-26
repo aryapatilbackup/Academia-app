@@ -124,5 +124,13 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
+<script id="splashfix2">
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    const splash = document.getElementById("splash");
+    if (splash) splash.style.display = "none";
+  }, 1000);
+});
+</script>
 </body>
 </html>
