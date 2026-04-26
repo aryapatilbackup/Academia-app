@@ -1,7 +1,7 @@
 <?php
 require_once "student-auth.php";
 include "config/db.php";
- include 'includes/toast.php'; 
+
 $student_id = $_SESSION['user_id'];
 
 /* ===============================
@@ -169,6 +169,6 @@ function closeCertificateForm() {
 }
 </script>
 
-
+<?php include 'includes/toast.php'; ?>
 </body>
 </html>
