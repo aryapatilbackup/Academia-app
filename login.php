@@ -2,6 +2,17 @@
 session_start();
 require_once "config/db.php";
 
+// ✅ Auto login from cookie
+if (!isset($_SESSION['user_id']) && isset($_COOKIE['user_id'])) {
+    $_SESSION['user_id'] = $_COOKIE['user_id'];
+}
+
+// ✅ If already logged in → redirect
+if (isset($_SESSION['user_id'])) {
+    header("Location: student-dashboard.php");
+    exit;
+}
+
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -36,6 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION["email"] = $user["email"];
                 $_SESSION["role"] = $user["role"];
 
+                // ✅ REMEMBER USER (cookie for 30 days)
+                setcookie("user_id", $user["id"], time() + (86400 * 30), "/");
+
                 // 4️⃣ Redirect by role
                 if ($user["role"] === "admin") {
                     header("Location: admin-dashboard.php");
@@ -57,6 +71,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <meta charset="UTF-8" />
   <title>Login | My App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f172a">
 
   <link rel="stylesheet" href="login.css">
 </head>
@@ -107,5 +124,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   </div>
 
   <script src="login.js"></script>
+
+  <script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
 </body>
 </html>
