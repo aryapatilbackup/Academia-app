@@ -31,11 +31,13 @@ include "config/db.php";
     <button class="primary-btn">Upload PDF</button>
 
   </form>
-
-</div>
 <?php if (isset($_GET['success'])): ?>
-  <div class="filter-card">✅ Exam timetable PDF uploaded</div>
+  <div id="toast" class="toast">
+    Exam timetable PDF uploaded successfully
+  </div>
 <?php endif; ?>
+<?php include 'includes/toast.php'; ?>
+</div>
 
 </body>
 </html>
