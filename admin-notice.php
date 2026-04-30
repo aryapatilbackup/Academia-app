@@ -25,7 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="student.css">
 </head>
 <body class="page">
-  <h3>Post Notice</h3>
+  <div class="page-header">
+    
+    <a href="admin-dashboard.php" class="back-btn">←</a>
+    <h2>Upload Exam Timetable</h2>
+  </div>
 
   <?php if (!empty($success)) echo "<p>$success</p>"; ?>
 
