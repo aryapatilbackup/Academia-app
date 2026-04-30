@@ -23,26 +23,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>Post Notice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="student.css">
+
 </head>
+
 <body class="page">
+
   <div class="page-header">
-    
     <a href="admin-dashboard.php" class="back-btn">←</a>
-    <h2>Upload Exam Timetable</h2>
+    <h2>Upload Notice</h2>
   </div>
 
-  <?php if (!empty($success)) echo "<p>$success</p>"; ?>
+  <?php if (!empty($success)) echo "<p class='success-msg'>$success</p>"; ?>
 
-  <form method="post">
-    <input type="text" name="title" placeholder="Title" required>
-    <textarea name="message" placeholder="Message" required></textarea>
-    <input type="url" name="link" placeholder="Optional link">
-    <select name="target" required>
-      <option value="student">Student</option>
-      <option value="teacher">Teacher</option>
-      <option value="all">All</option>
-    </select>
-    <button class="primary-btn">Post Notice</button>
-  </form>
+  <div class="form-card">
+    <form method="post">
+      <input type="text" name="title" placeholder="Title" required>
+
+      <textarea name="message" placeholder="Message" required></textarea>
+
+      <input type="url" name="link" placeholder="Optional link">
+
+      <select name="target" required>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+        <option value="all">All</option>
+      </select>
+
+      <button class="primary-btn">Post Notice</button>
+    </form>
+  </div>
+
 </body>
 </html>
