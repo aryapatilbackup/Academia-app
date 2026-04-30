@@ -109,8 +109,9 @@ $assignment = $assignmentQuery->fetch_assoc();
         </div>
       </div>
 
-      <div class="header-badge">🎓</div>
-
+      <div class="header-badge">
+  <img src="icon-192.png" class="app-icon">
+</div>
     </div>
   </header>
 

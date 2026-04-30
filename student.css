@@ -406,7 +406,7 @@ min-height: 178vh;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #28588f;
+  background: #7655ce;
   border-top: 1px solid #ddd;
   display: flex;
   justify-content: space-around;
@@ -1871,3 +1871,18 @@ margin-top:4px;
       font-weight: 500;
       cursor: pointer;
     }
+    .app-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.header-badge {
+  width: 50px;
+  height: 50px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
