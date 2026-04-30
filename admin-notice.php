@@ -33,8 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Upload Notice</h2>
   </div>
 
-  <?php if (!empty($success)) echo "<p class='success-msg'>$success</p>"; ?>
-
+  <?php if (!empty($success)): ?>
+  <div class="exam-card" style="background:#dcfce7; border-left:5px solid #16a34a;">
+    <div style="color:#16a34a; font-weight:600;">
+      <?php echo $success; ?>
+    </div>
+  </div>
+<?php endif; ?>
   <div class="form-card">
     <form method="post">
       <input type="text" name="title" placeholder="Title" required>
