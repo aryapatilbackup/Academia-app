@@ -10,6 +10,11 @@ $q = $conn->query("SELECT name FROM users WHERE id='$student_id'");
 $user = $q->fetch_assoc();
 $name = $user['name'];
 
+/* ===== PROFILE PHOTO (ADDED) ===== */
+$p = $conn->query("SELECT profile_photo FROM student_profiles WHERE user_id='$student_id'");
+$profileData = $p->fetch_assoc();
+$profile = $profileData['profile_photo'] ?? 'default.png';
+
 
 /* ===== ATTENDANCE ===== */
 function getAttendancePercent($conn, $student_id, $type = null) {
@@ -93,7 +98,10 @@ $assignment = $assignmentQuery->fetch_assoc();
     <div class="header-content">
 
       <div class="header-left">
-        <div class="header-avatar">👤</div>
+        <!-- 🔥 PROFILE IMAGE REPLACED -->
+        <div class="header-avatar">
+          <img src="uploads/profile/<?php echo $profile; ?>" style="width:100%; height:100%; border-radius:50%;">
+        </div>
 
         <div class="header-info">
           <div class="header-greeting">Good Afternoon</div>
