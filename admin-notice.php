@@ -34,8 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
   <?php if (!empty($success)): ?>
-  <div id="toast" class="toast">
-    <?php echo $success; ?>
+  <div class="exam-card" style="background:#dcfce7; border-left:5px solid #16a34a;">
+    <div style="color:#16a34a; font-weight:600;">
+      <?php echo $success; ?>
+    </div>
   </div>
 <?php endif; ?>
   <div class="form-card">
@@ -55,6 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <button class="primary-btn">Post Notice</button>
     </form>
   </div>
-<?php include 'includes/toast.php'; ?>
+
 </body>
 </html>

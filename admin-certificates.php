@@ -44,8 +44,8 @@ if(isset($_POST['approve_certificate'])) {
   .certificate-page .exam-title { margin-bottom:4px; }
   .certificate-page .exam-date { margin-bottom:4px; }
   </style>
-</head>
 
+</head>
 <body>
 
 <div class="page certificate-page">
@@ -55,10 +55,11 @@ if(isset($_POST['approve_certificate'])) {
     <h2>Certificate Requests</h2>
   </div>
 
-  <!-- ✅ TOAST (moved cleanly here) -->
   <?php if(isset($_GET['success'])): ?>
-    <div id="toast" class="toast">
-      Certificate issued successfully
+    <div class="exam-card" style="background:#dcfce7; border-left:5px solid #16a34a;">
+      <div style="color:#16a34a; font-weight:600;">
+        Certificate Issued Successfully.
+      </div>
     </div>
   <?php endif; ?>
 
@@ -118,7 +119,6 @@ if(isset($_POST['approve_certificate'])) {
 
     <?php endif; ?>
 
-    <!-- VIEW PDF -->
     <?php if($row['status'] == 'approved'): ?>
       <div class="exam-actions" style="margin-top:12px;">
         <a href="uploads/certificates/<?= $row['pdf_file'] ?>" 
@@ -138,9 +138,6 @@ if(isset($_POST['approve_certificate'])) {
     </div>
 
   <?php endif; ?>
-
-  <!-- ✅ TOAST SCRIPT (correct place) -->
-  <?php include 'includes/toast.php'; ?>
 
 </div>
 

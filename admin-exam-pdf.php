@@ -31,13 +31,14 @@ include "config/db.php";
     <button class="primary-btn">Upload PDF</button>
 
   </form>
+
+</div>
 <?php if (isset($_GET['success'])): ?>
-  <div id="toast" class="toast">
-    Exam timetable PDF uploaded successfully
+  <div class="exam-card" style="background:#dcfce7; border-left:5px solid #16a34a; margin:1rem;">
+    <div style="color:#16a34a; font-weight:600;">
+      Exam timetable PDF uploaded successfully
+    </div>
   </div>
 <?php endif; ?>
-<?php include 'includes/toast.php'; ?>
-</div>
-
 </body>
 </html>

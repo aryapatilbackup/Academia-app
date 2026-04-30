@@ -71,10 +71,11 @@ if(isset($_POST['issue_pass'])) {
     <h2>Railway Concession Requests</h2>
   </div>
 
-  <!-- ✅ TOAST -->
   <?php if(isset($_GET['issued'])): ?>
-    <div id="toast" class="toast">
-      Concession pass issued successfully
+    <div class="exam-card" style="background:#dcfce7; border-left:5px solid #16a34a;">
+      <div style="color:#16a34a; font-weight:600;">
+        Concession Pass Issued Successfully.
+      </div>
     </div>
   <?php endif; ?>
 
@@ -149,9 +150,6 @@ if(isset($_POST['issue_pass'])) {
   </div>
 
   <?php endif; ?>
-
-  <!-- ✅ TOAST SCRIPT -->
-  <?php include 'includes/toast.php'; ?>
 
 </div>
 
