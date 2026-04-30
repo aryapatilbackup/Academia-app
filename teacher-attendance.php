@@ -66,7 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_otp'])) {
 
 <body class="page">
 
-<h3>Mark Attendance</h3>
+<div class="page-header">
+    <a href="teacher-dashboard.php" class="back-btn">←</a>
+    <h2>Mark Attendance</h2>
+  </div>
 
 <!-- ================= OTP SECTION ================= -->
 
