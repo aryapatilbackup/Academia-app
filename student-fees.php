@@ -131,7 +131,7 @@ $academic_year = $fee['academic_year'] ?? '-';
 
 </div>
 
-<?php include 'includes/bottom-nav.php'; ?>
+
 
 <script>
 function showTab(tabId, btn) {

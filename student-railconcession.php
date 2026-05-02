@@ -182,7 +182,7 @@ window.history.replaceState({}, document.title, cleanURL);
 
 </script>
 
-<?php include 'includes/bottom-nav.php'; ?>
+
 
 </body>
 </html>
