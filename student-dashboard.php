@@ -222,7 +222,7 @@ $assignment = $assignmentQuery->fetch_assoc();
   <!-- ===== ACADEMIC ===== -->
   <section class="content-section">
 
-    <h2 class="section-title">📚 Academic</h2><br>
+    <h2 class="section-title">📚 Academic Features</h2><br>
 
     <div class="menu-list">
       <a href="student-attendance.php" class="menu-item">📊 Attendance</a>
@@ -239,7 +239,7 @@ $assignment = $assignmentQuery->fetch_assoc();
   <!-- ===== SERVICES ===== -->
   <section class="content-section">
 
-    <h2 class="section-title">🛠 Services</h2><br>
+    <h2 class="section-title">🛠 Other Services</h2><br>
 
     <div class="service-list">
       <a href="student-certificates.php" class="service-item">📜 Certificate</a>
