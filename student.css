@@ -942,116 +942,118 @@ input[type="date"] {
 }
   
 
-/* ===== ID CARD PAGE (MATCH DASHBOARD) ===== */
+/* ===== ID CARD PAGE ===== */
 
 .id-page {
-  background: linear-gradient(135deg, #6a77d6, #7b6bd6);
-  min-height: 100vh;
-  padding-bottom: 80px;
+  background: #255f4c;
+
 }
 
-/* HEADER */
+/* Top College Header */
 .id-header {
-  background: linear-gradient(135deg, #7c8cff, #6a77d6);
+  background: linear-gradient(135deg, #0f766e, #0b5f59);
   color: #fff;
-  padding: 30px 16px 80px;
+  padding: 30px 16px 70px;
+   
   text-align: center;
   font-size: 14px;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+  line-height: 1.4;
 }
 
-/* PROFILE CARD */
+/* Profile Section */
 .id-profile {
   background: #fff;
-  margin: -55px 16px 0;
-  padding: 70px 16px 20px;
-  border-radius: 20px;
+  margin: -45px 16px 0;
+  padding: 55px 16px 16px;
+  border-radius: 16px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* PROFILE IMAGE */
 .id-pic {
-  width: 110px;
-  height: 110px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
-  border: 5px solid #fff;
+  border: 4px solid #fff;
   object-fit: cover;
   position: absolute;
-  top: -55px;
+  top: 110px;
   left: 50%;
   transform: translateX(-50%);
   background: #fff;
 }
 
-/* NAME */
 .id-profile h2 {
-  margin-top: 10px;
-  font-size: 20px;
-  color: #4f46e5;
-  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font-size: 18px;
+  color: #0f766e;
+  font-weight: 600;
 }
 
 .sid {
   font-size: 14px;
-  color: #666;
+  color: #555;
 }
 
-/* DETAILS CARD */
+/* Details Card */
 .id-details {
-  background: #fff;
+  background: #e2dfdfe8;
   margin: 16px;
   padding: 16px;
-  border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   font-size: 14px;
 }
 
 .id-details p {
   display: flex;
   justify-content: space-between;
-  margin: 12px 0;
+  align-items: flex-start;
+  margin: 10px 0;
+  gap: 10px;
 }
 
 .id-details span:first-child {
-  color: #888;
+  flex: 0 0 90px;   /* fixed label width */
+  font-weight: 500;
+  color: #555;
 }
 
 .id-details span:last-child {
+  flex: 1;          /* take remaining space */
+  text-align: right;
   font-weight: 600;
-  color: #333;
+  word-break: break-word;
 }
 
-/* BARCODE CARD */
+/* Barcode */
 .barcode {
   background: #fff;
   margin: 16px;
-  padding: 18px;
-  border-radius: 20px;
+  padding: 16px;
+  border-radius: 16px;
   text-align: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
 .barcode img {
-  width: 60%;
+  width: 10%;
   max-width: 260px;
 }
 
 .barcode p {
-  margin-top: 8px;
+  margin-top: 6px;
   letter-spacing: 2px;
   font-weight: 600;
-  color: #555;
 }
 
-/* SIGN */
+/* Signature */
 .sign {
   text-align: center;
   font-size: 13px;
-  color: #fff;
-  margin-top: 20px;
+  color: #f7eeee;
+  margin: 18px 0;
 }
 .dashboard::after,
 .page::after {
