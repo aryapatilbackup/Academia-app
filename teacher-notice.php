@@ -28,7 +28,7 @@ $result = $conn->query("
 <div class="page">
 
   <div class="page-header">
-    <a href="student-dashboard.php" class="back-btn">←</a>
+    <a href="teacher-dashboard.php" class="back-btn">←</a>
     <h2>Notice</h2>
   </div>
 
