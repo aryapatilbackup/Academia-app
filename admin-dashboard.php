@@ -72,9 +72,6 @@ text-align:center;
 
 <a href="admin-teachers.php">👨‍🏫 Manage Teachers</a>
 
-<a href="admin-subjects.php">📚 Manage Subjects</a>
-
-<a href="admin-fees.php">💰 Fees Management</a>
 
 <a href="admin-chatbox.php">💬 Chat</a>
 
