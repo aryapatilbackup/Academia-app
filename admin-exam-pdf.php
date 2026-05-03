@@ -1,6 +1,11 @@
 <?php
 require_once "admin-auth.php";
 include "config/db.php";
+
+/* ===============================
+   FETCH ALL TIMETABLES
+=================================*/
+$timetables = $conn->query("SELECT * FROM exam_timetables ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>
@@ -10,16 +15,25 @@ include "config/db.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="student.css">
 </head>
-<body>
 
-<div class="page">
+<body class="page">
 
+  <!-- HEADER -->
   <div class="page-header">
-    
     <a href="admin-dashboard.php" class="back-btn">←</a>
     <h2>Upload Exam Timetable</h2>
   </div>
 
+  <!-- SUCCESS MESSAGE -->
+  <?php if (isset($_GET['success'])): ?>
+    <div class="exam-card" style="background:#dcfce7; border-left:5px solid #16a34a;">
+      <div style="color:#16a34a; font-weight:600;">
+        Exam timetable PDF uploaded successfully
+      </div>
+    </div>
+  <?php endif; ?>
+
+  <!-- FORM -->
   <form method="post" action="admin-exam-pdf-save.php" enctype="multipart/form-data" class="filter-card">
 
     <label>Title</label>
@@ -32,13 +46,41 @@ include "config/db.php";
 
   </form>
 
-</div>
-<?php if (isset($_GET['success'])): ?>
-  <div class="exam-card" style="background:#dcfce7; border-left:5px solid #16a34a; margin:1rem;">
-    <div style="color:#16a34a; font-weight:600;">
-      Exam timetable PDF uploaded successfully
-    </div>
+  <!-- ===============================
+       ALL TIMETABLES
+  =================================-->
+  <div class="page-header" style="margin-top:20px;">
+    <h2>All Timetables</h2>
   </div>
-<?php endif; ?>
+
+  <?php if ($timetables && $timetables->num_rows > 0): ?>
+
+    <?php while($t = $timetables->fetch_assoc()): ?>
+
+      <div class="exam-card">
+
+        <!-- TITLE -->
+        <div style="font-weight:600; font-size:16px;">
+          <?= htmlspecialchars($t['title']) ?>
+        </div>
+
+        <!-- FILE LINK -->
+        <a href="uploads/exam/<?= htmlspecialchars($t['pdf_file']) ?>" target="_blank"
+           style="display:inline-block; margin-top:8px; color:#6366f1;">
+          View PDF
+        </a>
+
+      </div>
+
+    <?php endwhile; ?>
+
+  <?php else: ?>
+
+    <div class="exam-card">
+      No timetables uploaded yet.
+    </div>
+
+  <?php endif; ?>
+
 </body>
 </html>
