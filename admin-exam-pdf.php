@@ -55,27 +55,34 @@ $timetables = $conn->query("SELECT * FROM exam_pdfs ORDER BY id DESC");
 
   <?php if ($timetables && $timetables->num_rows > 0): ?>
 
-    <?php while($t = $timetables->fetch_assoc()): ?>
+    <?php while ($t = $timetables->fetch_assoc()): 
+      // ✅ FIXED: correct variable + define path
+      $pdfPath = "uploads/exams/" . $t['pdf_file'];
+    ?>
 
       <div class="exam-card">
 
-    <div class="exam-title">
-      <?= htmlspecialchars($row['title']) ?>
-    </div>
+        <!-- TITLE -->
+        <div class="exam-title">
+          <?= htmlspecialchars($t['title'] ?? '') ?>
+        </div>
 
-    <div class="exam-date">
-      Uploaded on <?= date("d M Y", strtotime($row['created_at'])) ?>
-    </div>
+        <!-- DATE -->
+        <div class="exam-date">
+          Uploaded on 
+          <?= !empty($t['created_at']) 
+                ? date("d M Y", strtotime($t['created_at'])) 
+                : '—' ?>
+        </div>
 
-    <div class="exam-actions">
-      <a href="<?= $pdfPath ?>" target="_blank" class="view-btn">
-        View PDF
-      </a>
+        <!-- ACTION -->
+        <div class="exam-actions">
+          <a href="<?= htmlspecialchars($pdfPath) ?>" target="_blank" class="view-btn">
+            View PDF
+          </a>
+        </div>
 
-      
-    </div>
-
-  </div>
+      </div>
 
     <?php endwhile; ?>
 
