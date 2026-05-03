@@ -42,9 +42,7 @@ include 'teacher-auth.php';
 📢 Notices
 </a>
 
-<a class="primary-btn" href="teacher-profile.php">
-👤 Profile
-</a>
+
 
 <a class="primary-btn" href="logout.php" style="background:#dc2626;">
 🚪 Logout
