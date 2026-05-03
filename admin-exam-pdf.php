@@ -59,19 +59,23 @@ $timetables = $conn->query("SELECT * FROM exam_pdfs ORDER BY id DESC");
 
       <div class="exam-card">
 
-        <!-- TITLE -->
-        <div style="font-weight:600; font-size:16px;">
-          <?= htmlspecialchars($t['title']) ?>
-        </div>
+    <div class="exam-title">
+      <?= htmlspecialchars($row['title']) ?>
+    </div>
 
-        <!-- FILE LINK -->
-        <div class="exam-actions">
+    <div class="exam-date">
+      Uploaded on <?= date("d M Y", strtotime($row['created_at'])) ?>
+    </div>
+
+    <div class="exam-actions">
       <a href="<?= $pdfPath ?>" target="_blank" class="view-btn">
         View PDF
       </a>
+
+      
     </div>
 
-      </div>
+  </div>
 
     <?php endwhile; ?>
 
