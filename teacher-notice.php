@@ -1,5 +1,5 @@
 <?php
-include 'student-auth.php';
+include 'teacher-auth.php';
 include 'config/db.php';
 
 $student_id = $_SESSION['user_id'];
