@@ -92,7 +92,6 @@ $result = $conn->query("
 
 </div>
 
-<?php include 'includes/bottom-nav.php'; ?>
 
 </body>
 </html>
