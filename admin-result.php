@@ -110,7 +110,7 @@ input[type="file"] {
 
   <!-- HEADER -->
   <div class="page-header">
-    <button onclick="history.back()" class="back-btn">←</button>
+    <a href="admin-dashboard.php" class="back-btn">←</a>
     <h1>Upload Result</h1>
   </div>
 
