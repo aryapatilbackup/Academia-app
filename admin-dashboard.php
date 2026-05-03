@@ -68,9 +68,9 @@ text-align:center;
 
 <a href="admin-railway-requests.php">🚆 Railway Requests</a>
 
-<a href="admin-students.php">👨‍🎓 Manage Students</a>
+<a href="manage-students.php">👨‍🎓 Manage Students</a>
 
-<a href="admin-teachers.php">👨‍🏫 Manage Teachers</a>
+<a href="manage-teachers.php">👩‍🏫 Manage Teachers</a>
 
 
 <a href="admin-chatbox.php">💬 Chat</a>
