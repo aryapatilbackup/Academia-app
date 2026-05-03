@@ -945,13 +945,13 @@ input[type="date"] {
 /* ===== ID CARD PAGE ===== */
 
 .id-page {
-  background: #255f4c;
+  background: #9266cc;
 
 }
 
 /* Top College Header */
 .id-header {
-  background: linear-gradient(135deg, #0f766e, #0b5f59);
+  background: linear-gradient(135deg, #994eca, #8161bb);
   color: #fff;
   padding: 30px 16px 70px;
    
@@ -962,7 +962,7 @@ input[type="date"] {
 
 /* Profile Section */
 .id-profile {
-  background: #fff;
+  background: #efeef1;
   margin: -45px 16px 0;
   padding: 55px 16px 16px;
   border-radius: 16px;
