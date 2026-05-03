@@ -5,7 +5,11 @@ include "config/db.php";
 /* ===============================
    FETCH ALL TIMETABLES
 =================================*/
-$timetables = $conn->query("SELECT * FROM exam_pdfs ORDER BY id DESC");
+$result = $conn->query("
+  SELECT title, pdf_file, created_at
+  FROM exam_pdfs
+  ORDER BY created_at $order
+");
 ?>
 
 <!DOCTYPE html>
