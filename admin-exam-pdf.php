@@ -65,10 +65,9 @@ $timetables = $conn->query("SELECT * FROM exam_pdfs ORDER BY id DESC");
         </div>
 
         <!-- FILE LINK -->
-        <a href="uploads/exam/<?= htmlspecialchars($t['pdf_file']) ?>" target="_blank"
-           style="display:inline-block; margin-top:8px; color:#6366f1;">
-          View PDF
-        </a>
+        <a href="<?= $pdfPath ?>" target="_blank" class="view-btn">
+        View PDF
+      </a>
 
       </div>
 
