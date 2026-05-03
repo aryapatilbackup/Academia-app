@@ -945,13 +945,13 @@ input[type="date"] {
 /* ===== ID CARD PAGE ===== */
 
 .id-page {
-  background: #9266cc;
+  background: #7c66cc;
 
 }
 
 /* Top College Header */
 .id-header {
-  background: linear-gradient(135deg, #994eca, #8161bb);
+  background: #503ba0;
   color: #fff;
   padding: 30px 16px 70px;
    
