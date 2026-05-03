@@ -4,7 +4,6 @@ include "config/db.php";
 
 $user_id = $_SESSION['user_id'];
 
-// Fetch all conversations user is part of
 $stmt = $conn->prepare("
 SELECT 
     c.id, 
@@ -38,7 +37,6 @@ $result = $stmt->get_result();
 </head>
 
 <body>
-
 <div class="page">
 
 <div class="page-header">
@@ -50,9 +48,7 @@ $result = $stmt->get_result();
 <?php while ($row = $result->fetch_assoc()): ?>
 
 <?php
-// Private chat → get other user's name
 if ($row['type'] === 'private') {
-
     $stmt2 = $conn->prepare("
         SELECT u.name 
         FROM conversation_participants cp
@@ -61,19 +57,14 @@ if ($row['type'] === 'private') {
         AND cp.user_id != ?
         LIMIT 1
     ");
-
     $stmt2->bind_param("ii", $row['id'], $user_id);
     $stmt2->execute();
-    $res2 = $stmt2->get_result();
-    $otherUser = $res2->fetch_assoc();
-
+    $otherUser = $stmt2->get_result()->fetch_assoc();
     $chatName = $otherUser['name'] ?? 'Private Chat';
-
 } else {
     $chatName = $row['name'];
 }
 
-/* UNREAD COUNT */
 $unreadStmt = $conn->prepare("
 SELECT COUNT(*) as total
 FROM messages
@@ -81,62 +72,45 @@ WHERE conversation_id = ?
 AND sender_id != ?
 AND is_read = 0
 ");
-
 $unreadStmt->bind_param("ii", $row['id'], $user_id);
 $unreadStmt->execute();
-$unreadRes = $unreadStmt->get_result();
-$unreadRow = $unreadRes->fetch_assoc();
-$unreadCount = $unreadRow['total'];
+$unreadCount = $unreadStmt->get_result()->fetch_assoc()['total'];
 ?>
 
 <a href="chat.php?id=<?= $row['id'] ?>" class="chat-item">
 
-  <div class="chat-avatar">
-    <?= strtoupper(substr($chatName, 0, 1)) ?>
-  </div>
+<div class="chat-avatar">
+<?= strtoupper(substr($chatName, 0, 1)) ?>
+</div>
 
-  <div class="chat-content">
+<div class="chat-content">
+<div class="chat-top">
+<span class="chat-name"><?= htmlspecialchars($chatName) ?></span>
+<span class="chat-time">
+<?= $row['last_time'] ? date("h:i A", strtotime($row['last_time'])) : '' ?>
+</span>
+</div>
 
-    <div class="chat-top">
-      <span class="chat-name"><?= htmlspecialchars($chatName) ?></span>
+<div class="chat-preview">
+<?= htmlspecialchars($row['last_message'] ?? 'No messages yet') ?>
+</div>
+</div>
 
-      <span class="chat-time">
-        <?= $row['last_time'] ? date("h:i A", strtotime($row['last_time'])) : '' ?>
-      </span>
-    </div>
-
-    <div class="chat-preview">
-      <?= htmlspecialchars($row['last_message'] ?? 'No messages yet') ?>
-    </div>
-
-  </div>
-
-  <?php if ($unreadCount > 0): ?>
-    <span class="chat-badge"><?= $unreadCount ?></span>
-  <?php endif; ?>
+<?php if ($unreadCount > 0): ?>
+<span class="chat-badge"><?= $unreadCount ?></span>
+<?php endif; ?>
 
 </a>
 
 <?php endwhile; ?>
-
 <?php else: ?>
-
-<div class="empty-state">
-<p>No chats available.</p>
-</div>
-
+<div class="empty-state">No chats available.</div>
 <?php endif; ?>
 
 </div>
 
 <a href="new-chat.php" class="chat-float-btn">+</a>
-
 <?php include 'includes/bottom-nav.php'; ?>
 
-<script>
-setInterval(function(){
-  location.reload();
-}, 2000);
-</script>
 </body>
 </html>
