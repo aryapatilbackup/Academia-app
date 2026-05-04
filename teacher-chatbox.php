@@ -1,5 +1,5 @@
 <?php
-require_once "student-auth.php";
+require_once "chat-auth.php";
 include "config/db.php";
 
 $user_id = $_SESSION['user_id'];
