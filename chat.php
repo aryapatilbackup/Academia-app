@@ -78,7 +78,17 @@ if ($conversation['type'] === 'private') {
 <div class="chat-page">
 
 <div class="chat-header">
-<a href="student-chatbox.php" class="back-btn">←</a>
+<?php
+$role = $_SESSION['role'] ?? 'student';
+
+$back = match($role) {
+    'admin' => 'admin-chatbox.php',
+    'teacher' => 'teacher-chatbox.php',
+    default => 'student-chatbox.php'
+};
+?>
+
+<a href="<?= $back ?>" class="back-btn">←</a>
 <h3><?= htmlspecialchars($chatName) ?></h3>
 </div>
 
