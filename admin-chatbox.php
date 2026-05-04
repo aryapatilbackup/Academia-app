@@ -133,7 +133,7 @@ $result = $stmt->get_result();
 <!-- FLOAT BUTTON -->
 <a href="new-chat.php" class="chat-float-btn">+</a>
 
-<?php include 'includes/bottom-nav.php'; ?>
+
 
 <!-- 🔥 REAL-TIME SCRIPT -->
 <script>
