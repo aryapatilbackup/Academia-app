@@ -4,6 +4,9 @@ include "config/db.php";
 
 $user_id = $_SESSION['user_id'];
 
+/* ===============================
+   FETCH INITIAL CHAT LIST
+=================================*/
 $stmt = $conn->prepare("
 SELECT 
     c.id, 
@@ -37,80 +40,124 @@ $result = $stmt->get_result();
 </head>
 
 <body>
+
 <div class="page">
 
-<div class="page-header">
-<a href="student-dashboard.php" class="back-btn">←</a>
-<h2>Chats</h2>
+  <!-- HEADER -->
+  <div class="page-header">
+    <a href="student-dashboard.php" class="back-btn">←</a>
+    <h2>Chats</h2>
+  </div>
+
+  <!-- 🔥 CHAT LIST WRAPPER -->
+  <div id="chat-list">
+
+    <?php if ($result->num_rows > 0): ?>
+    <?php while ($row = $result->fetch_assoc()): ?>
+
+    <?php
+    // GET CHAT NAME
+    if ($row['type'] === 'private') {
+        $stmt2 = $conn->prepare("
+            SELECT u.name 
+            FROM conversation_participants cp
+            JOIN users u ON cp.user_id = u.id
+            WHERE cp.conversation_id = ?
+            AND cp.user_id != ?
+            LIMIT 1
+        ");
+        $stmt2->bind_param("ii", $row['id'], $user_id);
+        $stmt2->execute();
+        $otherUser = $stmt2->get_result()->fetch_assoc();
+        $chatName = $otherUser['name'] ?? 'Private Chat';
+    } else {
+        $chatName = $row['name'];
+    }
+
+    // UNREAD COUNT
+    $unreadStmt = $conn->prepare("
+        SELECT COUNT(*) as total
+        FROM messages
+        WHERE conversation_id = ?
+        AND sender_id != ?
+        AND is_read = 0
+    ");
+    $unreadStmt->bind_param("ii", $row['id'], $user_id);
+    $unreadStmt->execute();
+    $unreadCount = $unreadStmt->get_result()->fetch_assoc()['total'];
+    ?>
+
+    <!-- CHAT ITEM -->
+    <a href="chat.php?id=<?= $row['id'] ?>" class="chat-item">
+
+      <div class="chat-avatar">
+        <?= strtoupper(substr($chatName, 0, 1)) ?>
+      </div>
+
+      <div class="chat-content">
+
+        <div class="chat-top">
+          <span class="chat-name"><?= htmlspecialchars($chatName) ?></span>
+
+          <span class="chat-time">
+            <?= $row['last_time'] ? date("h:i A", strtotime($row['last_time'])) : '' ?>
+          </span>
+        </div>
+
+        <div class="chat-preview">
+          <?= htmlspecialchars($row['last_message'] ?? 'No messages yet') ?>
+        </div>
+
+      </div>
+
+      <?php if ($unreadCount > 0): ?>
+        <span class="chat-badge"><?= $unreadCount ?></span>
+      <?php endif; ?>
+
+    </a>
+
+    <?php endwhile; ?>
+
+    <?php else: ?>
+
+    <div class="empty-state">
+      <p>No chats available.</p>
+    </div>
+
+    <?php endif; ?>
+
+  </div>
+
 </div>
 
-<?php if ($result->num_rows > 0): ?>
-<?php while ($row = $result->fetch_assoc()): ?>
+<!-- FLOAT BUTTON -->
+<a href="new-chat.php" class="chat-float-btn">+</a>
 
-<?php
-if ($row['type'] === 'private') {
-    $stmt2 = $conn->prepare("
-        SELECT u.name 
-        FROM conversation_participants cp
-        JOIN users u ON cp.user_id = u.id
-        WHERE cp.conversation_id = ?
-        AND cp.user_id != ?
-        LIMIT 1
-    ");
-    $stmt2->bind_param("ii", $row['id'], $user_id);
-    $stmt2->execute();
-    $otherUser = $stmt2->get_result()->fetch_assoc();
-    $chatName = $otherUser['name'] ?? 'Private Chat';
-} else {
-    $chatName = $row['name'];
+<?php include 'includes/bottom-nav.php'; ?>
+
+<!-- 🔥 REAL-TIME SCRIPT -->
+<script>
+let isFetching = false;
+
+function fetchChatList() {
+  if (isFetching) return;
+  isFetching = true;
+
+  fetch("fetch-chat-list.php")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("chat-list").innerHTML = data;
+      isFetching = false;
+    })
+    .catch(() => isFetching = false);
 }
 
-$unreadStmt = $conn->prepare("
-SELECT COUNT(*) as total
-FROM messages
-WHERE conversation_id = ?
-AND sender_id != ?
-AND is_read = 0
-");
-$unreadStmt->bind_param("ii", $row['id'], $user_id);
-$unreadStmt->execute();
-$unreadCount = $unreadStmt->get_result()->fetch_assoc()['total'];
-?>
+// initial load
+fetchChatList();
 
-<a href="chat.php?id=<?= $row['id'] ?>" class="chat-item">
-
-<div class="chat-avatar">
-<?= strtoupper(substr($chatName, 0, 1)) ?>
-</div>
-
-<div class="chat-content">
-<div class="chat-top">
-<span class="chat-name"><?= htmlspecialchars($chatName) ?></span>
-<span class="chat-time">
-<?= $row['last_time'] ? date("h:i A", strtotime($row['last_time'])) : '' ?>
-</span>
-</div>
-
-<div class="chat-preview">
-<?= htmlspecialchars($row['last_message'] ?? 'No messages yet') ?>
-</div>
-</div>
-
-<?php if ($unreadCount > 0): ?>
-<span class="chat-badge"><?= $unreadCount ?></span>
-<?php endif; ?>
-
-</a>
-
-<?php endwhile; ?>
-<?php else: ?>
-<div class="empty-state">No chats available.</div>
-<?php endif; ?>
-
-</div>
-
-<a href="new-chat.php" class="chat-float-btn">+</a>
-<?php include 'includes/bottom-nav.php'; ?>
+// real-time update (safe polling)
+setInterval(fetchChatList, 2000);
+</script>
 
 </body>
 </html>
