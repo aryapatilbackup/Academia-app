@@ -23,7 +23,17 @@ $result = $stmt->get_result();
 <div class="page">
 
   <div class="page-header">
-    <a href="student-chatbox.php" class="back-btn">←</a>
+    <?php
+$role = $_SESSION['role'] ?? 'student';
+
+$back = match($role) {
+    'admin' => 'admin-chatbox.php',
+    'teacher' => 'teacher-chatbox.php',
+    default => 'student-chatbox.php'
+};
+?>
+
+<a href="<?= $back ?>" class="back-btn">←</a>
     <h2>Select Contact</h2>
   </div>
 
