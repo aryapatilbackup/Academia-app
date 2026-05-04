@@ -51,41 +51,40 @@ $result = $conn->query("
   </div>
 
   <!-- Schedule Content -->
-  <?php if ($result && $result->num_rows > 0): ?>
+   <?php if ($result && $result->num_rows > 0): ?>
 
-    <?php while ($row = $result->fetch_assoc()): ?>
+  <?php while ($row = $result->fetch_assoc()): ?>
 
-      <div class="exam-card">
+    <div class="dash-card schedule-card">
 
-        <div class="exam-title">
-          <?= htmlspecialchars($row['subject_name']) ?>
-          (<?= htmlspecialchars($row['code']) ?>)
-        </div>
-
-        <div class="exam-date">
-          <?= substr($row['start_time'],0,5) ?>
-          -
-          <?= substr($row['end_time'],0,5) ?>
-          • Room: <?= htmlspecialchars($row['room']) ?>
-        </div>
-
-        <div class="exam-date">
-          <?= htmlspecialchars($row['teacher_name']) ?>
-        </div>
-
+      <div class="time-badge">
+        <?= date("g:i A", strtotime($row['start_time'])) ?>
+        -
+        <?= date("g:i A", strtotime($row['end_time'])) ?>
       </div>
 
-    <?php endwhile; ?>
+      <h3>
+        <?= htmlspecialchars($row['code']) ?> -
+        <?= htmlspecialchars($row['subject_name']) ?>
+      </h3>
 
-  <?php else: ?>
+      <div class="dash-meta">
+        <span>📍 Room <?= htmlspecialchars($row['room']) ?></span>
+        <span>👤 <?= htmlspecialchars($row['teacher_name']) ?></span>
+      </div>
 
-    <div class="empty-state">
-      <div class="empty-icon">📅</div>
-      <p>No class schedule for <?= htmlspecialchars($day) ?>.</p>
     </div>
 
-  <?php endif; ?>
+  <?php endwhile; ?>
 
+<?php else: ?>
+
+  <div class="empty-state">
+    <div class="empty-icon">📅</div>
+    <p>No class schedule for <?= htmlspecialchars($day) ?>.</p>
+  </div>
+
+<?php endif; ?>
 </div>
 
 </body>
