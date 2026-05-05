@@ -229,7 +229,7 @@ $assignment = $assignmentQuery->fetch_assoc();
       <a href="student-assignment.php" class="menu-item">📘 Assignments</a>
       <a href="student-schedule.php" class="menu-item">📅 Class Schedule</a>
       <a href="student-online.php" class="menu-item">💻 Online Class</a>
-      <a href="student-internalmark.php" class="menu-item">📘 Internal Mark</a>
+      
       <a href="student-registersubject.php" class="menu-item">➕ Register Subject</a>
     </div>
 
